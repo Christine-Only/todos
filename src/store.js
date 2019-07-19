@@ -31,11 +31,37 @@ const mutations = {
   editTodo (state, payload) {
     const item = state.list.find(v => v.id === payload.id)
     item.name = payload.name
+  },
+  clearTodo (state) {
+    state.list = state.list.filter(v => !v.flag)
+  }
+}
+
+const getters = {
+  showFooter (state) {
+    return state.list.length > 0
+  },
+  leftCount (state) {
+    return state.list.filter(v => !v.flag).length
+  },
+  showClear (state) {
+    return state.list.some(v => v.flag)
+  }
+}
+
+const actions = {
+  clearTodoAsync (context) {
+    // console.log(context)
+    setTimeout(() => {
+      context.commit('clearTodo')
+    }, 1000)
   }
 }
 const store = new Vuex.Store({
   state,
-  mutations
+  mutations,
+  getters,
+  actions
 })
 
 export default store
