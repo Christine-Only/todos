@@ -26,6 +26,11 @@ const mutations = {
       flag: false
     }
     state.list.unshift(item)
+  },
+  // 编辑任务时,mutations提供的函数中,只能有两个参数,所以当需要很多个参数时,需要放到一个对象payload中
+  editTodo (state, payload) {
+    const item = state.list.find(v => v.id === payload.id)
+    item.name = payload.name
   }
 }
 const store = new Vuex.Store({
