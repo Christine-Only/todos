@@ -18,6 +18,14 @@ const mutations = {
   },
   delTodo (state, id) {
     state.list = state.list.filter(v => v.id !== id)
+  },
+  addTodo (state, name) {
+    const item = {
+      id: Date.now(),
+      name,
+      flag: false
+    }
+    state.list.unshift(item)
   }
 }
 const store = new Vuex.Store({
